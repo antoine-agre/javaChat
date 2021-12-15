@@ -15,6 +15,8 @@ public class Client {
         
         try{
             Socket connexion = new Socket("localhost", 8888);
+            Thread t = new Thread(new RunnableClient(connexion));
+            t.start();
             System.out.println("Connecté au serveur.");
             
             output = connexion.getOutputStream();

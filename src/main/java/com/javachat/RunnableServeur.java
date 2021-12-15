@@ -23,6 +23,7 @@ public class RunnableServeur implements Runnable{
             while(true){
                 if((n = stream.read(bytes)) != 0){
                     System.out.println("Client : " + new String(bytes, 0, n));
+                    Serveur.envoyerMessage(bytes);
                 }
             }
         }
