@@ -22,7 +22,7 @@ public class RunnableClient implements Runnable{
             InputStream in = this.socket.getInputStream();
             while(true){
                 if((n = in.read(bytes)) != 0){
-                    System.out.println("Message reçu : " + new String(bytes, 0, n));
+                    System.out.println(new String(bytes, 0, n));
                 }
             }
         }

@@ -10,8 +10,13 @@ public class Client {
     static byte[] bytes = new byte[64];
     static OutputStream output;
     static Scanner userInput = new Scanner(System.in);
+    static String pseudo;
     
     public static void main(String[] args){
+        
+        System.out.println("Veuillez choisir un pseudo : ");
+        pseudo = userInput.nextLine().trim();
+        System.out.println("Pseudo choisi : " + pseudo);
         
         try{
             Socket connexion = new Socket("localhost", 8888);
@@ -20,6 +25,10 @@ public class Client {
             System.out.println("Connecté au serveur.");
             
             output = connexion.getOutputStream();
+            
+            //envoi pseudo
+            output.write(pseudo.getBytes());
+            
             while(true){
                 bytes = userInput.nextLine().getBytes();
                 output.write(bytes);

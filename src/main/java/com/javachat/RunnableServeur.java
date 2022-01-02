@@ -6,10 +6,11 @@ import java.net.Socket;
 
 public class RunnableServeur implements Runnable{
     
-    String name;
+    String clientName;
     Socket socketClient;
     InputStream stream;
     byte[] bytes = new byte[64];
+    String buffMessage;
     int n;
     
     public RunnableServeur(Socket _socket){
@@ -20,10 +21,20 @@ public class RunnableServeur implements Runnable{
     public void run(){
         try{
             this.stream = socketClient.getInputStream();
+            
+            //réception et stockage du pseudo
+            n = stream.read(bytes);
+            clientName = new String(bytes, 0, n);
+            Serveur.tableUsers.put(socketClient, clientName);
+            //Serveur.enregistrerPseudo(clientName, socketClient);
+            //System.out.println("Pseudo du client : " + clientName);
+            Serveur.annonce(clientName + " est connecté.");
+            
             while(true){
                 if((n = stream.read(bytes)) != 0){
-                    System.out.println("Client : " + new String(bytes, 0, n));
-                    Serveur.envoyerMessage(bytes);
+                    buffMessage = new String(bytes, 0, n);
+                    //System.out.println("Client : " + buffMessage);
+                    Serveur.envoyerMessage(buffMessage, socketClient);
                 }
             }
         }
