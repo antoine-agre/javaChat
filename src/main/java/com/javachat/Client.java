@@ -11,6 +11,7 @@ public class Client {
     static OutputStream output;
     static Scanner userInput = new Scanner(System.in);
     static String pseudo;
+    static boolean stop = false;
     
     public static void main(String[] args){
         
@@ -23,23 +24,25 @@ public class Client {
             Thread t = new Thread(new RunnableClient(connexion));
             t.start();
             System.out.println("Connecté au serveur.");
+            System.out.println("Tapez '/quit' pour vous déconnecter et quitter l'application.");
             
             output = connexion.getOutputStream();
             
             //envoi pseudo
             output.write(pseudo.getBytes());
             
-            while(true){
+            while(stop == false){
                 bytes = userInput.nextLine().getBytes();
                 output.write(bytes);
+                if(new String(bytes, 0, bytes.length).equals("/quit")){
+                    connexion.close();
+                    stop = true;
+                }
             }
-            
-            //gestion connexion : demander pseudo et attendre vérification
-            
-            //boucle réception/envoi messages
         }
         catch(IOException e){e.printStackTrace();}
             
+        System.exit(0);
     }
     
 }
