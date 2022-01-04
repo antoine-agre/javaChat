@@ -15,6 +15,8 @@ public class Client {
     
     public static void main(String[] args){
         
+        new FenetreChat().setVisible(true);
+        
         System.out.println("Veuillez choisir un pseudo : ");
         pseudo = userInput.nextLine().trim();
         System.out.println("Pseudo choisi : " + pseudo);
