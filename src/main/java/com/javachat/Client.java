@@ -3,6 +3,7 @@ package com.javachat;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -13,10 +14,11 @@ public class Client {
     static String pseudo;
     static boolean stop = false;
     static FenetreChat fenetre;
+    static Socket connexion;
     
     static void loginToServer(){
         try{
-            Socket connexion = new Socket("localhost", 8888);
+            connexion = new Socket("localhost", 8888);
             Thread t = new Thread(new RunnableClient(connexion));
             t.start();
             output = connexion.getOutputStream();
@@ -28,6 +30,27 @@ public class Client {
         catch(IOException e){e.printStackTrace();}
     }
     
+    static void envoyerMessage(){
+        try{
+            bytes = fenetre.getInput().getBytes();
+            output.write(bytes);
+            if(new String(bytes, 0, bytes.length).equals("/quit")){
+                connexion.close();
+                //stop = true;
+                fenetre.setVisible(false);
+            }
+        }
+        catch(IOException e){e.printStackTrace();}
+    }
+    
+    /*static void getUserList(){
+        try{
+            bytes = new String("/users").getBytes();
+            output.write(bytes);
+        }
+        catch(IOException e){e.printStackTrace();}
+    }*/
+    
     public static void main(String[] args){
         
         //SaisiePseudo fenetreLogin = new SaisiePseudo(); 
@@ -35,7 +58,7 @@ public class Client {
         fenetre = new FenetreChat();
         new SaisiePseudo(fenetre).setVisible(true);
         
-        //while(true){System.out.println("Contenu : " + fenetre.chatContent);}
+        //while(true){System.out.println("ListePseudos : " + Serveur.listePseudos.toString());}
         
         
         /*System.out.println("Veuillez choisir un pseudo : ");

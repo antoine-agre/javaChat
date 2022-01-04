@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.concurrent.TimeUnit;
 
 public class Serveur {
     
@@ -37,6 +38,17 @@ public class Serveur {
             System.out.println(message);
         }
         catch(IOException e){e.printStackTrace();}
+    }
+    
+    protected static void broadcastUserList(){
+        annonce("/userlist");
+        try{TimeUnit.MILLISECONDS.sleep(100);}catch(InterruptedException e){e.printStackTrace();}
+        annonce(Serveur.listePseudos.toString());
+    }
+    
+    public static ArrayList<String> getPseudos(){
+        //System.out.println("SERVEUR : listePseudo = " + listePseudos.toString());
+        return listePseudos;
     }
     
     public static void main(String[] args){

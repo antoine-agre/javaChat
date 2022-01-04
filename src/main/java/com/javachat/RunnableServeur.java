@@ -27,7 +27,10 @@ public class RunnableServeur implements Runnable{
             n = stream.read(bytes);
             clientName = new String(bytes, 0, n);
             Serveur.tableUsers.put(socketClient, clientName);
+            Serveur.listePseudos.add(clientName);
             Serveur.annonce(clientName + " est connecté.");
+            Serveur.broadcastUserList();
+            //System.out.println("Liste pseudos : " + Serveur.listePseudos.toString());
 
             while(stop == false){
                 if((n = stream.read(bytes)) != 0){
@@ -36,8 +39,10 @@ public class RunnableServeur implements Runnable{
                     if(buffMessage.equals("/quit")){
                         Serveur.listeSockets.remove(socketClient);
                         Serveur.tableUsers.remove(socketClient);
+                        Serveur.listePseudos.remove(clientName);
                         Serveur.annonce(clientName + " est déconnecté.");
                         socketClient.close();
+                        Serveur.broadcastUserList();
                         this.stop = true;
                     }
                     else{
