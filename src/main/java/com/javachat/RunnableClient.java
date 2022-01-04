@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class RunnableClient implements Runnable{
     
-    //paramètres
+    //paramÃ¨tres
     Socket socket;
     int n;
     byte[] bytes = new byte[64];

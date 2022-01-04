@@ -1,4 +1,5 @@
-package interface_graphique;
+package com.javachat;
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -8,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.JTree;
@@ -19,15 +23,17 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.SystemColor;
 
-public class Messagerie extends JFrame {
+public class InterfaceChat extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtEntrezVosMessages;
-
+	
+	
+	private boolean mes=false;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,12 +44,12 @@ public class Messagerie extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public Messagerie(Interface0 frame) {
+	public InterfaceChat() {
 		setFont(new Font("Berlin Sans FB", Font.PLAIN, 13));
 		setTitle("Boite de discussion");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,12 +90,17 @@ public class Messagerie extends JFrame {
 		txtEntrezVosMessages = new JTextField();
 		txtEntrezVosMessages.setForeground(Color.LIGHT_GRAY);
 		txtEntrezVosMessages.setFont(new Font("Century Schoolbook", Font.PLAIN, 14));
-		txtEntrezVosMessages.setText("\u00C9crivez vos messages");
+		txtEntrezVosMessages.setText("");
 		txtEntrezVosMessages.setBounds(369, 214, 203, 44);
 		contentPane.add(txtEntrezVosMessages);
 		txtEntrezVosMessages.setColumns(10);
 		
 		JButton btnNewButton = new JButton("envoyer");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mes=true;
+			}
+		});
 		btnNewButton.setBounds(369, 282, 99, 23);
 		contentPane.add(btnNewButton);
 		
@@ -98,5 +109,10 @@ public class Messagerie extends JFrame {
 		btnNewButton_1.setBackground(new Color(0, 0, 0));
 		btnNewButton_1.setBounds(233, 379, 154, 17);
 		contentPane.add(btnNewButton_1);
+	}
+
+	public String ecrire() {
+		//while(mes==false) {System.out.println("mes  ="+mes);}
+		return txtEntrezVosMessages.getText();
 	}
 }
