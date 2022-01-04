@@ -22,13 +22,13 @@ public class RunnableServeur implements Runnable{
         try{
             this.stream = socketClient.getInputStream();
             
-            //rÃ©ception et stockage du pseudo
+            //réception et stockage du pseudo
             n = stream.read(bytes);
             clientName = new String(bytes, 0, n);
             Serveur.tableUsers.put(socketClient, clientName);
             //Serveur.enregistrerPseudo(clientName, socketClient);
             //System.out.println("Pseudo du client : " + clientName);
-            Serveur.annonce(clientName + " est connectÃ©.");
+            Serveur.annonce(clientName + " est connecté.");
             
             while(true){
                 if((n = stream.read(bytes)) != 0){

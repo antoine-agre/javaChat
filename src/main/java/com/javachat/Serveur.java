@@ -13,7 +13,7 @@ public class Serveur {
     static ArrayList<Socket> listeSockets = new ArrayList<>();
     static Hashtable<Socket, String> tableUsers = new Hashtable<Socket, String>();
     
-    /*Envoie un message Ã  tous les sockets de la liste.*/
+    /*Envoie un message à  tous les sockets de la liste.*/
     protected static void envoyerMessage(String contenu, Socket socket){
         
         String message = tableUsers.get(socket) + " : " + contenu;
@@ -28,7 +28,7 @@ public class Serveur {
         catch(IOException e){e.printStackTrace();}
     }
     
-    /*Demande l'envoi d'un message d'annonce Ã  tous les sockets de la liste.*/
+    /*Demande l'envoi d'un message d'annonce à tous les sockets de la liste.*/
     protected static void annonce(String message){
         try{
             for(Socket s : listeSockets){
@@ -42,15 +42,15 @@ public class Serveur {
     public static void main(String[] args){
         try{
             ServerSocket serverSocket = new ServerSocket(8888);
-            System.out.println("Socket serveur crÃ©Ã©e.");
+            System.out.println("Socket serveur créé...");
 
-            //boucle infinie : accepte connexions, gÃ¨re threads
+            //boucle infinie : accepte connexions, gère les threads
             Socket nouveauClient;
             
             while(true){
                     nouveauClient = serverSocket.accept();
                     listeSockets.add(nouveauClient);
-                    System.out.println("Connextion Ã©tablie avec un client.");
+                    System.out.println("Connextion établie avec un client.");
 
                     Thread t = new Thread(new RunnableServeur(nouveauClient));
                     t.start();
