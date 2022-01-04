@@ -6,11 +6,14 @@ package com.javachat;
  */
 public class SaisiePseudo extends javax.swing.JFrame {
 
+    FenetreChat fenetre;
+    
     /**
      * Creates new form saisiePseudo
      */
-    public SaisiePseudo() {
+    public SaisiePseudo(FenetreChat _fenetre) {
         initComponents();
+        fenetre = _fenetre; 
     }
 
     /**
@@ -47,13 +50,12 @@ public class SaisiePseudo extends javax.swing.JFrame {
                 .addComponent(labelPseudo)
                 .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(textFieldPseudo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(buttonPseudo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(127, 127, 127)
+                .addComponent(textFieldPseudo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(169, 169, 169)
+                .addComponent(buttonPseudo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -72,7 +74,13 @@ public class SaisiePseudo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonPseudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPseudoActionPerformed
-        // TODO add your handling code here:
+        String input = textFieldPseudo.getText().trim();
+        if(input.isEmpty()== false){
+            Client.pseudo = input;
+            Client.loginToServer();
+            fenetre.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_buttonPseudoActionPerformed
 
     /**
@@ -106,7 +114,7 @@ public class SaisiePseudo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SaisiePseudo().setVisible(true);
+                new SaisiePseudo(new FenetreChat()).setVisible(true);
             }
         });
     }

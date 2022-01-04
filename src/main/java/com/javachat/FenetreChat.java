@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.javachat;
 
 /**
@@ -10,11 +6,20 @@ package com.javachat;
  */
 public class FenetreChat extends javax.swing.JFrame {
 
+    //
+    String chatContent = "";
+    String userList = "";
+    
     /**
      * Creates new form FenetreChat
      */
     public FenetreChat() {
         initComponents();
+    }
+    
+    public void updateChat(String _str){
+        this.chatContent = this.chatContent.concat(_str + "\n");
+        this.textAreaChat.setText(chatContent);
     }
 
     /**
@@ -26,41 +31,42 @@ public class FenetreChat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        buttonEnvoyer = new javax.swing.JButton();
+        textFieldInput = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textAreaChat = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        textAreaUsers = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Open Sans", 1, 24)); // NOI18N
-        jButton1.setText("Envoyer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonEnvoyer.setFont(new java.awt.Font("Open Sans", 1, 24)); // NOI18N
+        buttonEnvoyer.setText("Envoyer");
+        buttonEnvoyer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonEnvoyerActionPerformed(evt);
             }
         });
 
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldInput.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        textFieldInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldInputActionPerformed(evt);
             }
         });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textAreaChat.setEditable(false);
+        textAreaChat.setColumns(20);
+        textAreaChat.setRows(5);
+        textAreaChat.setText(this.chatContent);
+        jScrollPane1.setViewportView(textAreaChat);
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        textAreaUsers.setEditable(false);
+        textAreaUsers.setColumns(20);
+        textAreaUsers.setRows(5);
+        jScrollPane2.setViewportView(textAreaUsers);
 
         jLabel1.setFont(new java.awt.Font("Open Sans", 0, 24)); // NOI18N
         jLabel1.setText("Utilisateurs");
@@ -78,7 +84,7 @@ public class FenetreChat extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
-                            .addComponent(jTextField1)))
+                            .addComponent(textFieldInput)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(230, 230, 230)
                         .addComponent(jLabel2)))
@@ -93,7 +99,7 @@ public class FenetreChat extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEnvoyer, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(23, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -109,21 +115,21 @@ public class FenetreChat extends javax.swing.JFrame {
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonEnvoyer, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldInputActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void buttonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnvoyerActionPerformed
+        this.updateChat("zbi");
+    }//GEN-LAST:event_buttonEnvoyerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,13 +167,13 @@ public class FenetreChat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonEnvoyer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea textAreaChat;
+    private javax.swing.JTextArea textAreaUsers;
+    private javax.swing.JTextField textFieldInput;
     // End of variables declaration//GEN-END:variables
 }

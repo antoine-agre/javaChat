@@ -12,12 +12,33 @@ public class Client {
     static Scanner userInput = new Scanner(System.in);
     static String pseudo;
     static boolean stop = false;
+    static FenetreChat fenetre;
+    
+    static void loginToServer(){
+        try{
+            Socket connexion = new Socket("localhost", 8888);
+            Thread t = new Thread(new RunnableClient(connexion));
+            t.start();
+            output = connexion.getOutputStream();
+            
+            //envoi pseudo
+            
+            output.write(pseudo.getBytes());
+        }
+        catch(IOException e){e.printStackTrace();}
+    }
     
     public static void main(String[] args){
         
-        new FenetreChat().setVisible(true);
+        //SaisiePseudo fenetreLogin = new SaisiePseudo(); 
+        //fenetreLogin.setVisible(true);
+        fenetre = new FenetreChat();
+        new SaisiePseudo(fenetre).setVisible(true);
         
-        System.out.println("Veuillez choisir un pseudo : ");
+        //while(true){System.out.println("Contenu : " + fenetre.chatContent);}
+        
+        
+        /*System.out.println("Veuillez choisir un pseudo : ");
         pseudo = userInput.nextLine().trim();
         System.out.println("Pseudo choisi : " + pseudo);
         
@@ -44,7 +65,7 @@ public class Client {
         }
         catch(IOException e){e.printStackTrace();}
             
-        System.exit(0);
+        System.exit(0);*/
     }
     
 }
